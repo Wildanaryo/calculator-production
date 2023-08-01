@@ -4,7 +4,7 @@ import "./App.css";
 function App() {
   const [data, setData] = useState("");
   const [cukai, setCukai] = useState("");
-  const [datcuk, setDatcuk] = useState("");
+  const [datcuk, setDatcuk] = useState(0);
   const [pallet, setPallet] = useState("");
   const [gcase, setGcase] = useState("");
   const [bal, setBal] = useState("");
@@ -12,7 +12,10 @@ function App() {
   const [result, setResult] = useState("");
 
   const handleHitung = () => {
-    setDatcuk(data - cukai);
+    const dataNumber = parseInt(data);
+    const cukaiNumber = parseInt(cukai);
+
+    setDatcuk(dataNumber + cukaiNumber);
   };
   const handleHasilAkhir = () => {
     setResult(hasilBaller - cukai - data);
