@@ -15,7 +15,7 @@ function App() {
     const dataNumber = parseInt(data);
     const cukaiNumber = parseInt(cukai);
 
-    setDatcuk(dataNumber + cukaiNumber);
+    setDatcuk(dataNumber - cukaiNumber);
   };
   const handleHasilAkhir = () => {
     setResult(hasilBaller - cukai - data);
