@@ -44,7 +44,7 @@ function App() {
         style={{ display: "flex", flexDirection: "column" }}
       >
         <div>
-          <h3>Hasil Packer</h3>
+          <h3>Cukai Terpakai</h3>
           <input
             type="number"
             value={data}
@@ -53,7 +53,7 @@ function App() {
           />
         </div>
         <div>
-          <h3>Hasil Cukai</h3>
+          <h3>Sisa Produk Bercukai</h3>
           <input
             type="number"
             value={cukai}
@@ -150,7 +150,7 @@ function App() {
                     marginBottom: "30px",
                   }}
                 >
-                  <h2>Hasil Produk Baller : </h2>
+                  <h2>Hasil Produksi Case Packer : </h2>
                   <h2>{hasilBaller}</h2>
                 </div>
               )}
