@@ -18,7 +18,7 @@ function App() {
     setDatcuk(dataNumber - cukaiNumber);
   };
   const handleHasilAkhir = () => {
-    setResult(hasilBaller - cukai - data);
+    setResult(cukai + data - hasilBaller);
   };
 
   const ggpallet = Math.floor(datcuk / 24000);
