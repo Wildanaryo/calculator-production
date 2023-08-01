@@ -18,7 +18,11 @@ function App() {
     setDatcuk(dataNumber - cukaiNumber);
   };
   const handleHasilAkhir = () => {
-    setResult(cukai + data - hasilBaller);
+    const cukaiNumber= parseInt(cukai); 
+    const dataNumber= parseInt(data);
+    const ballerNumber= parseInt(hasilBaller)
+
+    setResult(cukaiNumber + dataNumber - ballerNumber);
   };
 
   const ggpallet = Math.floor(datcuk / 24000);
