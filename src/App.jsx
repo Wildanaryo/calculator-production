@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import Calculator from "./Calculator";
 
 function App() {
   const [data, setData] = useState("");
@@ -46,8 +47,8 @@ function App() {
 
   console.log(data2, cukaiAkhir2);
   return (
-    <div style={{ minWidth: "min-content" }}>
-      <h1>Perhitungan LPC 2</h1>
+    <div style={{ minWidth: "350px" }}>
+      <h1>Hitung LPC 2</h1>
       <div
         className="input-box"
         style={{ display: "flex", flexDirection: "column" }}
@@ -55,18 +56,20 @@ function App() {
         <div>
           <h3>Cukai Terpakai</h3>
           <div>
-            <input
-              type="number"
-              value={data}
-              placeholder="Mesin 1"
-              onChange={(e) => setData(parseInt(e.target.value))}
-            />
-            <input
-              type="number"
-              value={data2}
-              placeholder="Mesin 2"
-              onChange={(e) => setData2(parseInt(e.target.value))}
-            />
+            <div style={{ display: "flex", maxWidth: "100%", width: "100%" }}>
+              <input
+                type="number"
+                value={data}
+                placeholder="Mesin 1"
+                onChange={(e) => setData(parseInt(e.target.value))}
+              />
+              <input
+                type="number"
+                value={data2}
+                placeholder="Mesin 2"
+                onChange={(e) => setData2(parseInt(e.target.value))}
+              />
+            </div>
             {datcuk && (
               <div style={{ border: "1px solid white", margin: "15px" }}>
                 <h2>Hasil Cukai Terpakai: {data + data2}</h2>
@@ -74,7 +77,7 @@ function App() {
             )}
           </div>
         </div>
-        <div>
+        <div style={{ marginTop: "20px" }}>
           <h3>Sisa Produk Bercukai Akhir</h3>
           <div>
             <div style={{ display: "flex", maxWidth: "100%" }}>
@@ -98,21 +101,23 @@ function App() {
             )}
           </div>
         </div>
-        <div>
+        <div style={{ marginTop: "20px" }}>
           <h3>Sisa Produk Bercukai Awal</h3>
           <div>
-            <input
-              type="number"
-              value={cukaiAwal1}
-              placeholder="Sisa Awal Mesin 1"
-              onChange={(e) => setCukaiAwal1(parseInt(e.target.value))}
-            />
-            <input
-              type="number"
-              value={cukaiAwal2}
-              placeholder="Sisa Awal Mesin 2"
-              onChange={(e) => setCukaiAwal2(parseInt(e.target.value))}
-            />
+            <div style={{ display: "flex", maxWidth: "100%" }}>
+              <input
+                type="number"
+                value={cukaiAwal1}
+                placeholder="Sisa Awal Mesin 1"
+                onChange={(e) => setCukaiAwal1(parseInt(e.target.value))}
+              />
+              <input
+                type="number"
+                value={cukaiAwal2}
+                placeholder="Sisa Awal Mesin 2"
+                onChange={(e) => setCukaiAwal2(parseInt(e.target.value))}
+              />
+            </div>
             {datcuk && (
               <div>
                 <h4>Sisa Awal: {cukaiAwal1 + cukaiAwal2}</h4>
@@ -182,7 +187,9 @@ function App() {
               padding: "20px",
             }}
           >
-            <h1>Perhitungan Akhir</h1>
+            <div style={{ maxWidth: "100%", wordWrap: "break-word" }}>
+              <h1>LPC 2</h1>
+            </div>
             <div
               style={{
                 display: "flex",
@@ -219,6 +226,7 @@ function App() {
                 <button
                   style={{
                     width: "300px",
+                    maxWidth: "50%",
                     marginTop: "15px",
                   }}
                   onClick={handleHasilAkhir}

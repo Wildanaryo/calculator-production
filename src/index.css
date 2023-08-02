@@ -27,7 +27,6 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
   min-height: 100vh;
 }
 
@@ -59,7 +58,8 @@ input {
   font-size: 35px;
   padding: 10px;
   border: 1px solid white;
-  width: 300px;
+  width: 50%;
+  max-width: 50%;
 }
 
 input:placeholder {
