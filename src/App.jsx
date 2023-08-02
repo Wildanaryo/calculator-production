@@ -3,8 +3,12 @@ import "./App.css";
 
 function App() {
   const [data, setData] = useState("");
-  const [cukai, setCukai] = useState("");
-  const [datcuk, setDatcuk] = useState(0);
+  const [data2, setData2] = useState("");
+  const [cukaiAkhir1, setCukaiAkhir1] = useState("");
+  const [cukaiAkhir2, setCukaiAkhir2] = useState("");
+  const [cukaiAwal1, setCukaiAwal1] = useState("");
+  const [cukaiAwal2, setCukaiAwal2] = useState("");
+  const [datcuk, setDatcuk] = useState("");
   const [pallet, setPallet] = useState("");
   const [gcase, setGcase] = useState("");
   const [bal, setBal] = useState("");
@@ -12,16 +16,20 @@ function App() {
   const [result, setResult] = useState("");
 
   const handleHitung = () => {
-    const dataNumber = parseInt(data);
-    const cukaiNumber = parseInt(cukai);
-
-    setDatcuk(dataNumber - cukaiNumber);
+    if (!data2) {
+      setData2(parseInt(0));
+    }
+    if (!cukaiAkhir2) {
+      setCukaiAkhir2(parseInt(0));
+    }
+    if (!cukaiAwal2) {
+      setCukaiAwal2(parseInt(0));
+    }
+    setDatcuk(
+      data + data2 - cukaiAkhir1 - cukaiAkhir2 + cukaiAwal1 + cukaiAwal2
+    );
   };
   const handleHasilAkhir = () => {
-   // const cukaiNumber= parseInt(cukai); 
-   // const dataNumber= parseInt(data);
-   //const ballerNumber= parseInt(hasilBaller)
-
     setResult(hasilBaller - datcuk);
   };
 
@@ -36,6 +44,7 @@ function App() {
 
   const hasilBaller = pallet * 24000 + gcase * 800 + bal * 200 + press * 10;
 
+  console.log(data2, cukaiAkhir2);
   return (
     <div style={{ minWidth: "min-content" }}>
       <h1>Perhitungan LPC 2</h1>
@@ -45,21 +54,83 @@ function App() {
       >
         <div>
           <h3>Cukai Terpakai</h3>
-          <input
-            type="number"
-            value={data}
-            placeholder="Masukkan Hasil Packer"
-            onChange={(e) => setData(e.target.value)}
-          />
+          <div>
+            <input
+              type="number"
+              value={data}
+              placeholder="Mesin 1"
+              onChange={(e) => setData(parseInt(e.target.value))}
+            />
+            <input
+              type="number"
+              value={data2}
+              placeholder="Mesin 2"
+              onChange={(e) => setData2(parseInt(e.target.value))}
+            />
+            {datcuk && (
+              <div style={{ border: "1px solid white", margin: "15px" }}>
+                <h2>Hasil Cukai Terpakai: {data + data2}</h2>
+              </div>
+            )}
+          </div>
         </div>
         <div>
-          <h3>Sisa Produk Bercukai</h3>
-          <input
-            type="number"
-            value={cukai}
-            placeholder="Masukkan Hasil Cukai"
-            onChange={(e) => setCukai(e.target.value)}
-          />
+          <h3>Sisa Produk Bercukai Akhir</h3>
+          <div>
+            <div style={{ display: "flex", maxWidth: "100%" }}>
+              <input
+                type="number"
+                value={cukaiAkhir1}
+                placeholder="Sisa Akhir Mesin 1"
+                onChange={(e) => setCukaiAkhir1(parseInt(e.target.value))}
+              />
+              <input
+                type="number"
+                value={cukaiAkhir2}
+                placeholder="Sisa Akhir Mesin 2"
+                onChange={(e) => setCukaiAkhir2(parseInt(e.target.value))}
+              />
+            </div>
+            {datcuk && (
+              <div>
+                <h4>Sisa Akhir: {cukaiAkhir1 + cukaiAkhir2}</h4>
+              </div>
+            )}
+          </div>
+        </div>
+        <div>
+          <h3>Sisa Produk Bercukai Awal</h3>
+          <div>
+            <input
+              type="number"
+              value={cukaiAwal1}
+              placeholder="Sisa Awal Mesin 1"
+              onChange={(e) => setCukaiAwal1(parseInt(e.target.value))}
+            />
+            <input
+              type="number"
+              value={cukaiAwal2}
+              placeholder="Sisa Awal Mesin 2"
+              onChange={(e) => setCukaiAwal2(parseInt(e.target.value))}
+            />
+            {datcuk && (
+              <div>
+                <h4>Sisa Awal: {cukaiAwal1 + cukaiAwal2}</h4>
+                <div style={{ display: "grid", placeItems: "center" }}>
+                  <h2
+                    style={{
+                      border: "1px solid white",
+                      padding: "10px",
+                      maxWidth: "300px",
+                    }}
+                  >
+                    Hasil Cukai di Mesin:{" "}
+                    {cukaiAkhir1 + cukaiAkhir2 - cukaiAwal1 - cukaiAwal2}
+                  </h2>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
         <div style={{ display: "grid", placeItems: "center" }}>
           <button onClick={handleHitung}>HITUNG</button>
@@ -112,7 +183,14 @@ function App() {
             }}
           >
             <h1>Perhitungan Akhir</h1>
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "left",
+              }}
+            >
               <p>Pallet</p>
               <input
                 type="number"
@@ -138,7 +216,15 @@ function App() {
                 onChange={(e) => setPress(e.target.value)}
               />
               <div style={{ display: "grid", placeItems: "center" }}>
-                <button onClick={handleHasilAkhir}>Hitung Hasil</button>
+                <button
+                  style={{
+                    width: "300px",
+                    marginTop: "15px",
+                  }}
+                  onClick={handleHasilAkhir}
+                >
+                  Hitung Hasil
+                </button>
               </div>
               {result && (
                 <div
