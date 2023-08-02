@@ -1,37 +1,41 @@
 import { useState } from "react";
 import "./App.css";
-import Calculator from "./Calculator";
 
 function App() {
   const [data, setData] = useState("");
   const [data2, setData2] = useState("");
-  const [cukaiAkhir1, setCukaiAkhir1] = useState("");
-  const [cukaiAkhir2, setCukaiAkhir2] = useState("");
-  const [cukaiAwal1, setCukaiAwal1] = useState("");
-  const [cukaiAwal2, setCukaiAwal2] = useState("");
+  const [akhirMesin1, setAkhirMesin1] = useState("");
+  const [awalMesin1, setAwalMesin1] = useState("");
+  const [akhirMesin2, setAkhirMesin2] = useState("");
+  const [awalMesin2, setAwalMesin2] = useState("");
   const [datcuk, setDatcuk] = useState("");
   const [pallet, setPallet] = useState("");
   const [gcase, setGcase] = useState("");
   const [bal, setBal] = useState("");
   const [press, setPress] = useState("");
   const [result, setResult] = useState("");
+  const [tambahMesin, setTambahMesin] = useState(false);
 
   const handleHitung = () => {
     if (!data2) {
       setData2(parseInt(0));
     }
-    if (!cukaiAkhir2) {
-      setCukaiAkhir2(parseInt(0));
+    if (!akhirMesin2) {
+      setAkhirMesin2(parseInt(0));
     }
-    if (!cukaiAwal2) {
-      setCukaiAwal2(parseInt(0));
+    if (!awalMesin2) {
+      setAwalMesin2(parseInt(0));
     }
     setDatcuk(
-      data + data2 - cukaiAkhir1 - cukaiAkhir2 + cukaiAwal1 + cukaiAwal2
+      data + data2 + akhirMesin1 - awalMesin1 + akhirMesin1 - awalMesin2
     );
   };
   const handleHasilAkhir = () => {
     setResult(hasilBaller - datcuk);
+  };
+
+  const handleTambah = () => {
+    setTambahMesin(true);
   };
 
   const ggpallet = Math.floor(datcuk / 24000);
@@ -45,7 +49,7 @@ function App() {
 
   const hasilBaller = pallet * 24000 + gcase * 800 + bal * 200 + press * 10;
 
-  console.log(data2, cukaiAkhir2);
+  console.log(data2, awalMesin1);
   return (
     <div style={{ minWidth: "350px" }}>
       <h1>Hitung LPC 2</h1>
@@ -77,67 +81,85 @@ function App() {
             )}
           </div>
         </div>
-        <div style={{ marginTop: "20px" }}>
-          <h3>Sisa Produk Bercukai Akhir</h3>
+        <div
+          style={{
+            marginTop: "20px",
+            border: "2px solid white",
+            padding: "10px",
+          }}
+        >
+          <h2 style={{ margin: "0" }}>Mesin 1</h2>
+          <div style={{ display: "grid", alignItems: "start" }}>
+            <p>Sisa Akhir</p>
+            <input
+              type="number"
+              value={akhirMesin1}
+              placeholder="Sisa Akhir Mesin 1"
+              onChange={(e) => setAkhirMesin1(parseInt(e.target.value))}
+            />
+            <p>Sisa Awal</p>
+            <input
+              type="number"
+              value={awalMesin1}
+              placeholder="Sisa Awal Mesin 1"
+              onChange={(e) => setAwalMesin1(parseInt(e.target.value))}
+            />
+
+            {datcuk && (
+              <div>
+                <h4>Cukai Mesin: {akhirMesin1 - awalMesin1}</h4>
+              </div>
+            )}
+          </div>
+        </div>
+        {!tambahMesin && (
           <div>
-            <div style={{ display: "flex", maxWidth: "100%" }}>
+            <button onClick={handleTambah}>Tambah Mesin</button>
+          </div>
+        )}
+        {tambahMesin && (
+          <div
+            style={{
+              marginTop: "20px",
+              border: "2px solid white",
+              padding: "10px",
+            }}
+          >
+            <h2 style={{ margin: "0" }}>Mesin 2</h2>
+            <div style={{ display: "grid", alignItems: "start" }}>
+              <p>Sisa Akhir</p>
               <input
                 type="number"
-                value={cukaiAkhir1}
-                placeholder="Sisa Akhir Mesin 1"
-                onChange={(e) => setCukaiAkhir1(parseInt(e.target.value))}
-              />
-              <input
-                type="number"
-                value={cukaiAkhir2}
+                value={akhirMesin2}
                 placeholder="Sisa Akhir Mesin 2"
-                onChange={(e) => setCukaiAkhir2(parseInt(e.target.value))}
+                onChange={(e) => setAkhirMesin2(parseInt(e.target.value))}
               />
-            </div>
-            {datcuk && (
-              <div>
-                <h4>Sisa Akhir: {cukaiAkhir1 + cukaiAkhir2}</h4>
-              </div>
-            )}
-          </div>
-        </div>
-        <div style={{ marginTop: "20px" }}>
-          <h3>Sisa Produk Bercukai Awal</h3>
-          <div>
-            <div style={{ display: "flex", maxWidth: "100%" }}>
+              <p>Sisa Awal</p>
               <input
                 type="number"
-                value={cukaiAwal1}
-                placeholder="Sisa Awal Mesin 1"
-                onChange={(e) => setCukaiAwal1(parseInt(e.target.value))}
-              />
-              <input
-                type="number"
-                value={cukaiAwal2}
+                value={awalMesin2}
                 placeholder="Sisa Awal Mesin 2"
-                onChange={(e) => setCukaiAwal2(parseInt(e.target.value))}
+                onChange={(e) => setAwalMesin2(parseInt(e.target.value))}
               />
-            </div>
-            {datcuk && (
-              <div>
-                <h4>Sisa Awal: {cukaiAwal1 + cukaiAwal2}</h4>
-                <div style={{ display: "grid", placeItems: "center" }}>
-                  <h2
-                    style={{
-                      border: "1px solid white",
-                      padding: "10px",
-                      maxWidth: "300px",
-                    }}
-                  >
-                    Hasil Cukai di Mesin:{" "}
-                    {cukaiAkhir1 + cukaiAkhir2 - cukaiAwal1 - cukaiAwal2}
-                  </h2>
+
+              {datcuk && (
+                <div>
+                  <h4>Cukai Mesin: {akhirMesin2 - awalMesin2}</h4>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
-        </div>
+        )}
+
         <div style={{ display: "grid", placeItems: "center" }}>
+          {datcuk && (
+            <div>
+              <h2 style={{ border: "1px solid white", padding: "10px" }}>
+                Hasil Cukai:{" "}
+                {akhirMesin1 - awalMesin1 + akhirMesin2 - awalMesin2}
+              </h2>
+            </div>
+          )}
           <button onClick={handleHitung}>HITUNG</button>
         </div>
       </div>
@@ -238,13 +260,16 @@ function App() {
                 <div
                   style={{
                     display: "flex",
-                    gap: "20px",
-                    justifyContent: "center",
+                    flexDirection: "column",
+                    alignItems: "center",
                     border: "1px solid white",
                     marginBottom: "30px",
+                    padding: "10px",
                   }}
                 >
-                  <h2>Hasil Produksi Case Packer : </h2>
+                  <h2 style={{ marginBottom: "0" }}>
+                    Hasil Produksi Case Packer :{" "}
+                  </h2>
                   <h2>{hasilBaller}</h2>
                 </div>
               )}
@@ -258,8 +283,8 @@ function App() {
                     borderRadius: "25px",
                   }}
                 >
-                  <h1>Hasil LPC 2 :</h1>
-                  <h1>{result}</h1>
+                  <h2 style={{ marginBottom: "0" }}>Hasil LPC 2 :</h2>
+                  <h1 style={{ marginTop: "0" }}>{result}</h1>
                 </div>
               </div>
             )}
