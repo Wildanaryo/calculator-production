@@ -31,7 +31,7 @@ function App() {
     );
   };
   const handleHasilAkhir = () => {
-    setResult(hasilBaller - datcuk);
+    setResult(hasilBaller + datcuk);
   };
 
   const handleTambah = () => {
