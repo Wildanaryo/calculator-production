@@ -50,9 +50,7 @@ function App() {
   const hasilBaller = pallet * 24000 + gcase * 800 + bal * 200 + press * 10;
 
   console.log(
-    hasilBaller +
-      (akhirMesin1 - awalMesin1 + akhirMesin2 - awalMesin2) -
-      (data + data2)
+   result
   );
   return (
     <div style={{ minWidth: "350px" }}>
