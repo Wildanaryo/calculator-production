@@ -18,16 +18,16 @@ function App() {
 
   const handleHitung = () => {
     if (!data2) {
-      setData2(parseInt(0));
+      setData2(0);
     }
     if (!akhirMesin2) {
-      setAkhirMesin2(parseInt(0));
+      setAkhirMesin2(0);
     }
     if (!awalMesin2) {
-      setAwalMesin2(parseInt(0));
+      setAwalMesin2(0);
     }
     setDatcuk(
-      data + data2 + akhirMesin1 - awalMesin1 + akhirMesin1 - awalMesin2
+      data + data2 - (akhirMesin1 - awalMesin1 + akhirMesin2 - awalMesin2)
     );
   };
   const handleHasilAkhir = () => {
@@ -49,7 +49,11 @@ function App() {
 
   const hasilBaller = pallet * 24000 + gcase * 800 + bal * 200 + press * 10;
 
-  console.log(data2, awalMesin1);
+  console.log(
+    hasilBaller +
+      (akhirMesin1 - awalMesin1 + akhirMesin2 - awalMesin2) -
+      (data + data2)
+  );
   return (
     <div style={{ minWidth: "350px" }}>
       <h1>Hitung LPC 2</h1>
@@ -67,12 +71,14 @@ function App() {
                 placeholder="Mesin 1"
                 onChange={(e) => setData(parseInt(e.target.value))}
               />
-              <input
-                type="number"
-                value={data2}
-                placeholder="Mesin 2"
-                onChange={(e) => setData2(parseInt(e.target.value))}
-              />
+              {tambahMesin && (
+                <input
+                  type="number"
+                  value={data2}
+                  placeholder="Mesin 2"
+                  onChange={(e) => setData2(parseInt(e.target.value))}
+                />
+              )}
             </div>
             {datcuk && (
               <div style={{ border: "1px solid white", margin: "15px" }}>
