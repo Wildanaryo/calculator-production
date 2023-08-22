@@ -49,9 +49,6 @@ function App() {
 
   const hasilBaller = pallet * 24000 + gcase * 800 + bal * 200 + press * 10;
 
-  console.log(
-   result
-  );
   return (
     <div style={{ minWidth: "350px" }}>
       <h1>Hitung LPC 2</h1>
